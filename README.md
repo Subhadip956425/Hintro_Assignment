@@ -1,148 +1,231 @@
-# TaskOrbit
+# TaskOrbit – Real-Time Task Collaboration Platform
 
-**TaskOrbit** is a project management application built with **Spring Boot**, **React**, **MongoDB**, and **MySQL**. It enables effective project tracking, task management, and team collaboration.  
+**TaskOrbit** is a **real-time task collaboration platform** inspired by tools like **Trello and Notion**.  
+It enables teams to collaboratively manage **boards, lists, and tasks** with **live updates**, role-based access, and activity tracking.
 
----
-
-## Table of Contents
-
-- [Features](#features)  
-- [Tech Stack](#tech-stack)  
-- [Prerequisites](#prerequisites)  
-- [Setup & Installation](#setup--installation)  
-  - [Backend (Spring Boot)](#backend-spring-boot)  
-  - [Frontend (React)](#frontend-react)  
-- [Database Configuration](#database-configuration)  
-- [Running the Application](#running-the-application)  
-- [Usage](#usage)  
-- [Deployment](#deployment)  
-- [Environment Variables](#environment-variables)  
-- [Contributing](#contributing)  
-- [License](#license)  
-- [Contact](#contact)
+This project was built as part of a **Full Stack Engineer Interview Assignment**, focusing on **frontend architecture, backend API design, real-time synchronization, and database modeling**.
 
 ---
 
-## Features
+## 🚀 Features
 
-- Create, read, update, delete (CRUD) tasks and projects  
-- User authentication and authorization (if applicable)  
-- Responsive UI with React  
-- RESTful API powered by Spring Boot  
-- Data storage using MongoDB and MySQL  
+### Core Functionality
+- User authentication (Signup / Login)
+- Create and manage **Boards**
+- Boards contain multiple **Lists**
+- Create, update, delete **Tasks** within lists
+- **Drag & drop** tasks across lists
+- Assign users to tasks
+- **Real-time updates** across multiple users
+- Activity history & audit tracking
+- Search and pagination support
 
----
-
-## Tech Stack
-
-- **Backend**: Spring Boot (Java)  
-- **Frontend**: React (JavaScript/TypeScript)  
-- **Databases**: MongoDB (NoSQL) and MySQL (Relational)  
-- **Build Tools**: Maven/Gradle (backend), npm/yarn (frontend)  
-- **Runtime**: Java 17+ (adjust as needed), Node.js version X.X.X  
-
----
-
-## Prerequisites
-
-Make sure you have the following installed:
-
-- Java JDK 17+  
-- Maven or Gradle  
-- Node.js and npm (or yarn)  
-- MongoDB instance (local or cloud)  
-- MySQL instance (local or cloud)  
+### Real-Time Capabilities
+- Live task updates using **WebSockets**
+- Multi-user synchronization without page refresh
+- Real-time drag-and-drop reflection across clients
 
 ---
 
-## Setup & Installation
+## 🧱 Tech Stack
+
+### Frontend
+- React (SPA)
+- Redux / Context API for state management
+- Drag & Drop (React DnD or equivalent)
+- WebSocket client for real-time updates
+
+### Backend
+- Spring Boot (REST APIs)
+- WebSocket (STOMP / Socket-based)
+- JWT-based authentication
+- Role-based access control
+
+### Databases
+- **MySQL** – relational data (users, boards, lists, permissions)
+- **MongoDB** – activity logs, history tracking
+
+### Tooling
+- Maven
+- Node.js + npm
+- Git
+- Docker-ready structure
+
+---
+
+## 🛠️ Prerequisites
+
+- Java 17+
+- Maven
+- Node.js (v18+ recommended)
+- MySQL
+- MongoDB
+
+---
+
+## 📦 Project Structure
+
+taskorbit/
+├── backend/
+│   ├── controllers
+│   ├── services
+│   ├── repositories
+│   ├── websocket
+│   └── security
+├── frontend/
+│   ├── components
+│   ├── redux
+│   ├── services
+│   └── pages
+└── README.md
+
+---
+
+## ⚙️ Setup & Installation
 
 ### Backend (Spring Boot)
 
-```bash
-# Navigate to the backend directory
-cd projectmanagementsystem  # or wherever your Spring Boot project resides
+cd backend  
+mvn clean install  
+mvn spring-boot:run  
 
-# Build the project
-mvn clean install
-# or
-./mvnw clean install
+Backend runs at:  
+http://localhost:8080
 
-# Run the application
-mvn spring-boot:run
-# or
-./mvnw spring-boot:run
-```
+---
 
 ### Frontend (React)
 
-```bash
-# Navigate to the frontend directory
-cd project-management-react  # or the correct path
+cd frontend  
+npm install  
+npm start  
 
-# Install dependencies
-npm install
-# or
-yarn install
-
-# Start the development server
-npm start
-# or
-yarn start
-```
+Frontend runs at:  
+http://localhost:3000
 
 ---
 
-## Running the Application
+## 🗄️ Database Configuration
 
-1. Start **MongoDB** and **MySQL** services.  
-2. Run the **backend** using Spring Boot.  
-3. Run the **frontend** using React.  
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.  
+### MySQL
+- Users
+- Boards
+- Lists
+- Tasks
+- Task assignments
+- Roles and permissions
 
----
-
-## Usage
-
-- **Login / Register** users  
-- **Create Projects** and manage them  
-- **Add Tasks** to projects  
-- **Update Progress** and track completion  
-- **Delete Tasks/Projects** when no longer needed  
+### MongoDB
+- Activity history
+- Audit logs
+- Real-time event tracking
 
 ---
 
-## Contributing
+## 🔌 API Contract (High-Level)
 
-Contributions are welcome! 🎉  
+### Authentication
+- POST /auth/signup
+- POST /auth/login
 
-1. Fork this repo  
-2. Create a branch:  
-   ```bash
-   git checkout -b feature/your-feature
-   ```
-3. Commit your changes:  
-   ```bash
-   git commit -m "Add feature"
-   ```
-4. Push to your branch:  
-   ```bash
-   git push origin feature/your-feature
-   ```
-5. Submit a Pull Request  
+### Boards
+- POST /boards
+- GET /boards
+- PUT /boards/{boardId}
+- DELETE /boards/{boardId}
 
----
+### Lists
+- POST /boards/{boardId}/lists
+- GET /boards/{boardId}/lists
 
-## License
-
-This project is licensed under the **MIT License**.  
-See the [LICENSE](LICENSE) file for details.  
+### Tasks
+- POST /lists/{listId}/tasks
+- PUT /tasks/{taskId}
+- DELETE /tasks/{taskId}
 
 ---
 
-## Contact
+## 🔄 Real-Time Synchronization Strategy
 
-**Author:** Subhadip Guchhait  
+- WebSocket-based communication
+- Backend emits task create/update/delete/move events
+- Frontend subscribes to board-specific channels
+- Instant UI updates without API re-fetch
 
-- GitHub: [Subhadip956425](https://github.com/Subhadip956425)  
-- Email: subhadipguchhait106@gmail.com  
+---
+
+## 🧠 Frontend Architecture
+
+- SPA with React
+- Component-based architecture
+- Centralized state management
+- WebSocket integration
+- Optimistic UI updates
+- Native form handling
+
+---
+
+## 🧠 Backend Architecture
+
+- Controller → Service → Repository layering
+- JWT authentication
+- Role-based authorization
+- WebSocket gateway
+- Global exception handling
+
+---
+
+## 📊 Database Schema (High-Level)
+
+MySQL:
+- users
+- boards
+- lists
+- tasks
+- task_assignments
+- roles
+- permissions
+
+MongoDB:
+- activity_logs
+
+---
+
+## ⚖️ Assumptions & Trade-offs
+
+- MongoDB used for logs to reduce relational load
+- WebSockets preferred over polling
+- JWT for stateless auth
+- Simplicity over heavy UI animations
+
+---
+
+## 🧪 Testing
+
+- Unit tests for services
+- API testing with Postman
+- Manual testing for real-time features
+
+---
+
+## 🚀 Deployment Readiness
+
+- Environment-based config
+- Docker-compatible
+- Frontend: Netlify / Vercel
+- Backend: AWS / GCP
+
+---
+
+## 🔑 Demo Credentials
+
+Email: demo@taskorbit.com  
+Password: Demo@123
+
+---
+
+## 👤 Author
+
+**Subhadip Guchhait**  
+GitHub: https://github.com/Subhadip956425  
+Email: subhadipguchhait106@gmail.com
