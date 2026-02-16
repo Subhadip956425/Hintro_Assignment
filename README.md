@@ -65,6 +65,7 @@ This project was built as part of a **Full Stack Engineer Interview Assignment**
 
 ## 📦 Project Structure
 
+```text
 taskorbit/
 ├── backend/
 │   ├── controllers
@@ -79,29 +80,43 @@ taskorbit/
 │   └── pages
 └── README.md
 
----
+```
 
 ## ⚙️ Setup & Installation
 
 ### Backend (Spring Boot)
 
-cd backend  
-mvn clean install  
-mvn spring-boot:run  
+```bash
+# Navigate to the backend directory
+cd projectmanagementsystem  # or wherever your Spring Boot project resides
 
-Backend runs at:  
-http://localhost:8080
+# Build the project
+mvn clean install
+# or
+./mvnw clean install
 
----
+# Run the application
+mvn spring-boot:run
+# or
+./mvnw spring-boot:run
+```
 
 ### Frontend (React)
 
-cd frontend  
-npm install  
-npm start  
+```bash
+# Navigate to the frontend directory
+cd project-management-react  # or the correct path
 
-Frontend runs at:  
-http://localhost:3000
+# Install dependencies
+npm install
+# or
+yarn install
+
+# Start the development server
+npm start
+# or
+yarn start
+```
 
 ---
 
@@ -217,6 +232,27 @@ MongoDB:
 
 ---
 
+## Contributing
+
+Contributions are welcome! 🎉  
+
+1. Fork this repo  
+2. Create a branch:  
+   ```bash
+   git checkout -b feature/your-feature
+   ```
+3. Commit your changes:  
+   ```bash
+   git commit -m "Add feature"
+   ```
+4. Push to your branch:  
+   ```bash
+   git push origin feature/your-feature
+   ```
+5. Submit a Pull Request  
+
+---
+
 ## 🔑 Demo Credentials
 
 Email: demo@taskorbit.com  
@@ -224,8 +260,14 @@ Password: Demo@123
 
 ---
 
+## License
+
+This project is licensed under the **MIT License**.  
+See the [LICENSE](LICENSE) file for details.  
+
 ## 👤 Author
 
-**Subhadip Guchhait**  
-GitHub: https://github.com/Subhadip956425  
-Email: subhadipguchhait106@gmail.com
+**Author:** Subhadip Guchhait  
+
+- GitHub: [Subhadip956425](https://github.com/Subhadip956425)  
+- Email: subhadipguchhait106@gmail.com  
